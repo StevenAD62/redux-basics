@@ -1,27 +1,19 @@
+import * as actionTypes from './actions'
+
 const initialState = {
-    counter: 0
+    persons: []
 }
 
 const reducer = (state = initialState, action) => {
-    let currentState = {}
     switch (action.type) {
-        case 'INCREMENT':
-            currentState = {counter: state.counter + 1}
-            break;
-        case 'DECREMENT':
-            currentState = {counter: state.counter - 1}
-            break;
-        case 'ADD':
-            currentState = {counter : state.counter + action.value}
-            break;
-        case 'SUBTRACT':
-            console.log('STATE')
-            currentState = {counter : state.counter - action.value}
-            break;
+        case actionTypes.ADD_PERSON:
+            console.log('action :', action)
+            return {persons: state.persons.concat(action.data)}
+        case actionTypes.REMOVE_PERSON:
+            return {persons: state.persons.filter(person => person.id !== action.personId)}
         default:
-            currentState = {...state}
+            return state
     }
-    return currentState
 };
 
 export default reducer;
